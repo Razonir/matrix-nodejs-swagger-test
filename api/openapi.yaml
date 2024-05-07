@@ -6,7 +6,7 @@ info:
 servers:
 - url: https://virtserver.swaggerhub.com/RAZONIR/RazoMatrix/1.0
   description: SwaggerHub API Auto Mocking
-- url: http://localhost:8000
+- url: http://localhost:8080
 security:
 - jwtAuth: []
 paths:

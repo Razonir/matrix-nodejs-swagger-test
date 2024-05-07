@@ -58,7 +58,8 @@ exports.signinPOST = function(body) {
     if (!user || user.password !== body.password) {
       reject({ message: "Invalid username or password"});
     } else {
-      resolve(getToken(user.username));
+
+      resolve({"token": getToken(user.username)});
     }
   });
 }
