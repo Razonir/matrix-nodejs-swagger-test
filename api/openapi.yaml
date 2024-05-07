@@ -1,0 +1,126 @@
+openapi: 3.0.0
+info:
+  title: Matrix Calculator API
+  description: Api for preforming arithmetic operations
+  version: "1.0"
+servers:
+- url: https://virtserver.swaggerhub.com/RAZONIR/RazoMatrix/1.0
+  description: SwaggerHub API Auto Mocking
+- url: http://localhost:8000
+security:
+- jwtAuth: []
+paths:
+  /calculator:
+    post:
+      operationId: calculatorPOST
+      parameters:
+      - name: arithmetic-value
+        in: header
+        description: The arithmetic value
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/calculate-body'
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/calculator-Success'
+        "400":
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        "401":
+          description: Unauthorized
+          content: {}
+        default:
+          description: Default response
+          content: {}
+      security:
+      - jwtAuth: []
+      x-swagger-router-controller: Default
+  /auth/signin:
+    post:
+      description: Signin and get token
+      operationId: signinPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/signin'
+        required: true
+      responses:
+        "200":
+          description: signin
+          headers:
+            Set-Cookie:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/schemas/token'
+        "400":
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        default:
+          description: Default response
+          content: {}
+      security: []
+      x-swagger-router-controller: Default
+components:
+  schemas:
+    signin:
+      required:
+      - password
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    BadRequest:
+      type: object
+      properties:
+        message:
+          type: string
+    calculate-body:
+      required:
+      - num1
+      - num2
+      type: object
+      properties:
+        num1:
+          type: integer
+        num2:
+          type: integer
+    calculator-Success:
+      type: object
+      properties:
+        calculated_number:
+          type: integer
+      example:
+        calculated_number: 0
+    token:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
