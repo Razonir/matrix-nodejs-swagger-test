@@ -37,7 +37,7 @@ This API uses JSON Web Tokens (JWT) for authentication. To access protected endp
 - Request body should include a JSON object with `username` and `password`.
 - `POST /calculator`: Perform arithmetic operations on matrices.
 - Request body should include a JSON object with `num1` and `num2`, representing the matrices.
-- The arithmetic operation to be performed should be specified in the `arithmetic-value` header.
+- The arithmetic operation to be performed should be specified in the `arithmetic-value` header (you can use only (addition,subtraction,multiplication,division)
 
 Security
 All API requests must be made over HTTPS. In addition, sensitive endpoints require authentication using JWT tokens to ensure secure access.
