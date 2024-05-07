@@ -32,12 +32,18 @@ This Node.js project provides an API for performing arithmetic operations on mat
 This API uses JSON Web Tokens (JWT) for authentication. To access protected endpoints, include a valid JWT token in the `Authorization` header with the value `Bearer <token>`.
 
 ### Endpoints
-
 - `POST /auth/signin`: Sign in and get a token.
 - Request body should include a JSON object with `username` and `password`.
 - `POST /calculator`: Perform arithmetic operations on matrices.
 - Request body should include a JSON object with `num1` and `num2`, representing the matrices.
-- The arithmetic operation to be performed should be specified in the `arithmetic-value` header (you can use only (addition,subtraction,multiplication,division)
+- The arithmetic operation to be performed should be specified in the `arithmetic-value` header `you can use only (addition,subtraction,multiplication,division)`
 
+### Example User is 
+```
+{
+  "username": "TEST",
+  "password": "TEST"
+}
+```
 Security
 All API requests must be made over HTTPS. In addition, sensitive endpoints require authentication using JWT tokens to ensure secure access.
